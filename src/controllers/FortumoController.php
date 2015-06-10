@@ -17,7 +17,7 @@ class FortumoController extends \Shivergard\Fortumo\PackageController {
 
 
 	public function init(){
-		return view('fortumo::fortumo');
+		return Shivergard\Fortumo\Fortumo::get();
 	}
 
 }
