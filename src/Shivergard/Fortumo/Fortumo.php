@@ -1,20 +1,22 @@
 <?php namespace Shivergard\Fortumo;
 
+use \Config;
+
 class Fortumo{
 
-	public function get(){
+	public static function get(){
 		  //set true if you want to use script for billing reports
 		  //first you need to enable them in your account
 		  $billing_reports_enabled = false;
 
 		  // check that the request comes from Fortumo server
-		  if(!in_array($_SERVER['REMOTE_ADDR'],array('81.20.151.38', '81.20.148.122', '79.125.125.1', '209.20.83.207'))) {
+		  if(!in_array($_SERVER['REMOTE_ADDR'],array('127.0.0.1' , '81.20.151.38', '81.20.148.122', '79.125.125.1', '209.20.83.207'))) {
 		    header("HTTP/1.0 403 Forbidden");
-		    die("Error: Unknown IP");
+		    die("Error: Unknown IP [".$_SERVER['REMOTE_ADDR']."]");
 		  }
 
 		  // check the signature
-		  $secret = ''; // insert your secret between ''
+		  $secret = Config::get('fortumo.secret'); // insert your secret between ''
 		  if(empty($secret) || !check_signature($_GET, $secret)) {
 		    header("HTTP/1.0 404 Not Found");
 		    die("Error: Invalid signature");
