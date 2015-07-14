@@ -15,6 +15,10 @@ class FortumoController extends \Shivergard\Fortumo\PackageController {
 		return false;
 	}
 
+	public function billing(){
+		return false;
+	}
+
 
 	public function init(){
 		return \Shivergard\Fortumo\Fortumo::get();
