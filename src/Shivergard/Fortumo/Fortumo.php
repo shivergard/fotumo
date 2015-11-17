@@ -23,7 +23,7 @@ class Fortumo{
 
           // check the signature
           $secret = Config::get('fortumo.secret'); // insert your secret between ''
-          if(empty($secret) || !check_signature($_GET, $secret)) {
+          if(empty($secret) || !self::check_signature($_GET, $secret)) {
             header("HTTP/1.0 404 Not Found");
             self::log("Error: Invalid signature");
             die("Error: Invalid signature");
@@ -62,5 +62,21 @@ class Fortumo{
           }
 
     }
+
+
+    private static function check_signature($params_array, $secret) {
+    ksort($params_array);
+ 
+    $str = '';
+    foreach ($params_array as $k=>$v) {
+      if($k != 'sig') {
+        $str .= "$k=$v";
+      }
+    }
+    $str .= $secret;
+    $signature = md5($str);
+ 
+    return ($params_array['sig'] == $signature);
+  } 
 
 }
