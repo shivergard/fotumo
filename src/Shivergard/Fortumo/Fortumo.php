@@ -6,6 +6,7 @@ use \DB;
 class Fortumo{
 
     public static function log($data){
+       echo storage_path('logs/fortumo_'.date('d-m-Y').'.log');
        file_put_contents(storage_path('logs/fortumo_'.date('d-m-Y').'.log'), (string) $data, FILE_APPEND);
     }
 
