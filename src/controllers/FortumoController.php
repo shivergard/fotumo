@@ -22,7 +22,6 @@ class FortumoController extends \Shivergard\Fortumo\PackageController {
 
 
     public function init(){
-        Log::info("Hello [".$_SERVER['REMOTE_ADDR']."]");
         return \Shivergard\Fortumo\Fortumo::get();
     }
 
