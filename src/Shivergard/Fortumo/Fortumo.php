@@ -35,9 +35,16 @@ class Fortumo{
           //hint:use message_id to log your messages
           //additional parameters: country, price, currency, operator, keyword, shortcode 
           // do something with $sender and $message
-          if (!Config::get('fortumo.sms_table'))
-            $reply = "Thank you $sender for sending $message";
-          else{
+          if (!Config::get('fortumo.sms_table')){
+
+            if (Config::get('fortumo.sms_class')){
+              $className = Config::get('fortumo.sms_class');
+              $reply = $className::get($message);
+            }else{
+              $reply = "Thank you $sender for sending $message";
+            }  
+
+          }else{
             $smsType = DB::table(Config::get('fortumo.sms_table'))->select('id', 'table')->where('code' , $_GET['shortcode']);
             if ($smsType->count() == 0){
                 $reply = 'Incorrect request';
