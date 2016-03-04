@@ -1,7 +1,6 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use \Config;
-use \Redirect;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -21,7 +20,7 @@ Route::get('/fortumo/{method}', function($method)
     if (method_exists ( $controller , $method ))
     	return $controller->{$method}();
     else
-    	return Redirect::to('/');
+    	return \Redirect::to('/');
 });
 
 Route::get('/fortumo/{method}/{param}', function($method , $param)
@@ -30,5 +29,5 @@ Route::get('/fortumo/{method}/{param}', function($method , $param)
     if (method_exists ( $controller , $method ))
     	return $controller->{$method}($param);
     else
-    	return Redirect::to('/');
+    	return \Redirect::to('/');
 });
