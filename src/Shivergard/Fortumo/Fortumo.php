@@ -15,7 +15,23 @@ class Fortumo{
           $billing_reports_enabled = false;
 
           // check that the request comes from Fortumo server
-          if(!in_array($_SERVER['REMOTE_ADDR'],array('127.0.0.1' , '81.20.151.38', '81.20.148.122', '79.125.125.1', '209.20.83.207' , '54.72.6.23'))) {
+          if(!in_array($_SERVER['REMOTE_ADDR'],array(
+              '127.0.0.1' , 
+              '81.20.151.38', 
+              '81.20.148.122', 
+              '79.125.125.1', 
+              '209.20.83.207' , 
+              '54.72.6.23'
+              
+              '54.72.6.126',
+              '54.72.6.27' ,
+              '54.72.6.17' ,
+              '54.72.6.23' ,
+              '79.125.125.1' ,
+              '79.125.5.95' ,
+              '79.125.5.205' 
+              
+              ))) {
             header("HTTP/1.0 403 Forbidden");
             self::log("Error: Unknown IP [".$_SERVER['REMOTE_ADDR']."]");
             die("Error: Unknown IP [".$_SERVER['REMOTE_ADDR']."]");
